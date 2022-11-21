@@ -27,8 +27,13 @@ Faker::Config.locale = I18n.locale
 module FakeDataLoader
   extend FactoryBot::Syntax::Methods
 
+  USER_PASSWORD = 12345678
+
   def self.load
     load_admin
+    load_users
+    load_items
+    load_purchases
   end
 
   def self.load_admin
@@ -36,5 +41,38 @@ module FakeDataLoader
     pass = "password"
     admin = AdminUser.find_by(email: email)
     AdminUser.create!(email: email, password: pass, password_confirmation: pass) unless admin
+  end
+
+  def self.load_users
+    10.times do
+      user = create(
+        :user,
+        email: Faker::Internet.email,
+        password: USER_PASSWORD
+      )
+
+      puts "user: #{user.email} - password: #{USER_PASSWORD}"
+    end
+  end
+
+  def self.load_items
+    10.times do
+      create(
+        :item,
+        image: URI.parse(Faker::LoremFlickr.image).open
+      )
+    end
+  end
+
+  def self.load_purchases
+    User.all.each do |user|
+      rand(5..10).times do
+        create(
+          :purchase,
+          item: Item.all.sample,
+          user: user
+        )
+      end
+    end
   end
 end
