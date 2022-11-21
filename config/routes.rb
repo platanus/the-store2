@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   namespace :api, defaults: { format: :json } do
     namespace :internal do
+      resources :purchases, only: [:index, :create, :show]
       resources :items, only: [:index, :show]
     end
   end
