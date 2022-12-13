@@ -1,7 +1,11 @@
 /* eslint-disable no-undef */
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        base: ['"Roboto"', 'sans-serif'],
+      },
+    },
   },
   variants: {},
   plugins: [],
