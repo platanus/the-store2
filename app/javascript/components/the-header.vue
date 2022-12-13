@@ -1,4 +1,9 @@
 <script setup lang="ts">
+interface Props {
+  signedIn: string
+}
+defineProps<Props>();
+
 const inStore = location.pathname === '/';
 const inPurchases = location.pathname === '/purchases';
 </script>
@@ -8,7 +13,10 @@ const inPurchases = location.pathname === '/purchases';
     <h1 class="mr-16 text-2xl font-bold">
       The Store
     </h1>
-    <div class="flex gap-10">
+    <div
+      v-if="signedIn"
+      class="flex gap-10"
+    >
       <a
         href="/"
         :class="{'font-medium border-b-2 border-yellow-400': inStore}"

@@ -25,7 +25,10 @@
     <% end %>
 
     <div id="vue-app">
-      <the-header></the-header>
+      <the-header
+        :signed-in="<%= current_user.present? %>"
+      >
+      </the-header>
       <div class="container mx-auto">
         <%= yield %>
       </div>
