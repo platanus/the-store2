@@ -1,7 +1,13 @@
+import { csrfToken } from '@rails/ujs';
 import axios, { type AxiosRequestTransformer, type AxiosResponseTransformer } from 'axios';
 import convertKeys, { type objectToConvert } from '../utils/case-converter';
 
 const api = axios.create({
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-CSRF-Token': csrfToken(),
+  },
   transformRequest: [
     (data: objectToConvert) => convertKeys(data, 'decamelize'),
     ...(axios.defaults.transformRequest as AxiosRequestTransformer[]),
