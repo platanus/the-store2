@@ -1,3 +1,3 @@
 class ApplicationController < ActionController::Base
-  include PowerTypes::Presentable
+  respond_to :html, :json
 end
