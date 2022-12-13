@@ -25,8 +25,11 @@
     <% end %>
 
     <div id="vue-app">
-      <app></app>
-      <%= yield %>
+      <the-header></the-header>
+      <div class="container mx-auto">
+        <app></app>
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
