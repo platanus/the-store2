@@ -10,8 +10,8 @@ class ImageUploader < BaseUploader
   plugin :image_handling_utilities
 
   DERIVATIVES = {
-    sm: { size: [300, 300], resize_method: 'resize_to_fill!', type: 'jpg' },
-    sm_webp: { size: [300, 300], resize_method: 'resize_to_fill!', type: 'webp' }
+    sm: { size: [320, 320], resize_method: 'resize_to_fill!', type: 'jpg' },
+    sm_webp: { size: [320, 320], resize_method: 'resize_to_fill!', type: 'webp' }
   }
 
   Attacher.derivatives do |original|
