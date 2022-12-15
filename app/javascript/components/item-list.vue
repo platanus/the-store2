@@ -14,6 +14,7 @@ defineProps<Props>();
       <item-list-card
         v-for="item in items"
         :key="item.id"
+        :item-id="item.id"
         :name="item.name"
         :price="item.price"
         :image-url="item.image['sm']['url']"
