@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-  signedIn: string
+  signedIn: boolean
 }
 defineProps<Props>();
 
