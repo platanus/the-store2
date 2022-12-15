@@ -6,6 +6,7 @@ class Api::Internal::PurchaseSerializer < ActiveModel::Serializer
 
   attributes(
     :id,
+    :status,
     :created_at,
     :updated_at
   )

@@ -4,6 +4,7 @@ import type { Item } from './items';
 
 export interface Purchase {
   id: number;
+  status: 'pending' | 'delivered';
   user: User;
   item: Item;
 }
