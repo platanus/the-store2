@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
+import Notifications from '@kyvg/vue3-notification';
 import TheHeader from './components/the-header.vue';
+import BaseNotifications from './components/base-notifications.vue';
 import BaseInput from './components/base-input.vue';
 import BaseButton from './components/base-button.vue';
 import BaseCheckbox from './components/base-checkbox.vue';
@@ -13,11 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
       TheHeader,
       UserSession,
       ItemList,
+      BaseNotifications,
     },
   });
   app.component('BaseInput', BaseInput);
   app.component('BaseButton', BaseButton);
   app.component('BaseCheckbox', BaseCheckbox);
+  app.use(Notifications);
   app.mount('#vue-app');
 
   return app;
