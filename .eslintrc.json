@@ -231,7 +231,7 @@
     "id-blacklist": 0,
     "id-length": 0,
     "id-match": 0,
-    "indent": [2, 2],
+    "indent": "off",
     "key-spacing": [2, {
       "beforeColon": false,
       "afterColon": true
@@ -358,7 +358,8 @@
           "no-undef": "off",
           "no-unused-vars": "off",
           "no-spaced-func": "off",
-          "@typescript-eslint/no-unused-vars": "error"
+          "@typescript-eslint/no-unused-vars": "error",
+          "@typescript-eslint/indent": ["error", 2]
         }
     }
   ]
