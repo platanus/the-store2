@@ -2,6 +2,8 @@ class Purchase < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
+  enum status: { pending: 0, delivered: 1 }
+
   delegate :name, to: :item, prefix: true
 end
 
@@ -14,6 +16,7 @@ end
 #  item_id    :bigint(8)        not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  status     :integer          default("pending"), not null
 #
 # Indexes
 #

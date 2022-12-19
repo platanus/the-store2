@@ -59,7 +59,7 @@ module FakeDataLoader
     10.times do
       create(
         :item,
-        image: URI.parse(Faker::LoremFlickr.image).open
+        image: URI.parse(Faker::LoremFlickr.image(search_terms: ['furniture'])).open
       )
     end
   end

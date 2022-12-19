@@ -1,3 +1,5 @@
 class App::ItemsController < App::BaseController
-  def index; end
+  def index
+    @items = Item.all
+  end
 end
