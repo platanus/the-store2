@@ -1,2 +1,21 @@
 es-CL:
   hello: "Hola mundo"
+  activerecord:
+    models:
+      review:
+        one: Reseña
+        other: Reseñas
+      user:
+        one: Usuario
+        other: Usuarios
+      purchase:
+        one: Compra
+        other: Compras
+    attributes:
+      review:
+        item: Item
+        user: Usuario
+        body: Descripción
+  attributes:
+    created_at: Fecha de creación
+    updated_at: Fecha de actualización
