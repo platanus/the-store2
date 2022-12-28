@@ -30,12 +30,8 @@ async function buy() {
 </script>
 
 <template>
-  <div class="flex w-80 flex-col items-center gap-4 overflow-hidden rounded-lg bg-white shadow-md">
-    <img
-      :src="imageUrl"
-      alt="Product image"
-      class="w-full"
-    >
+  <div class="flex flex-col items-center gap-4 overflow-hidden bg-white rounded-lg shadow-md w-80">
+    <img :src="imageUrl" alt="Product image" class="w-full">
     <div class="flex flex-col gap-2 text-center text-zinc-800">
       <span class="text-xl font-bold">
         {{ formattedPrice }}

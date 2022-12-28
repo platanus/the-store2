@@ -37,11 +37,11 @@ defineProps<Props>();
           {{ item.price }}
         </p>
 
-        <div>
-          <p class="lg:mt-4">
+        <div class="md:mt-4">
+          <p class="text-base">
             {{ item.description }}
           </p>
-          <base-button class="w-full rounded-full">
+          <base-button class="w-full mt-4 rounded-full">
             Comprar
           </base-button>
         </div>
