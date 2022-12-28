@@ -2,25 +2,37 @@
 import { ref } from 'vue';
 import { useNotification } from '@kyvg/vue3-notification';
 import purchasesApi from '../api/purchases';
-
 import type { Item } from '../api/items';
 
 type Props = {
   item: Item
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+const loading = ref(false);
+const { notify } = useNotification();
 
+async function buy() {
+  loading.value = true;
+  try {
+    await purchasesApi.create(props.item.id);
+    notify({ text: 'Genial, recibimos tu orden! Te contactaremos para coordinar', type: 'success' });
+  } catch (error) {
+    notify({ text: 'Ups, ocurrió un error! Inténtalo de nuevo', type: 'error' });
+  } finally {
+    loading.value = false;
+  }
+}
 </script>
 
 <template>
   <div>
     <a
-      class="inline-flex items-center gap-2 px-3 py-2 text-sm rounded-full bg-zinc-100"
+      class="inline-flex items-center gap-2 rounded-full bg-zinc-100 px-3 py-2 text-sm"
       href="/"
     >
       <inline-svg
-        class="w-4 h-4 fill-white"
+        class="h-4 w-4 fill-white"
         :src="require('images/icon/back-arrow.svg')"
       />
       Volver
@@ -41,7 +53,11 @@ defineProps<Props>();
           <p class="text-base">
             {{ item.description }}
           </p>
-          <base-button class="w-full mt-4 rounded-full">
+          <base-button
+            class="mt-4 w-full rounded-full"
+            :disabled="loading"
+            @click="buy"
+          >
             Comprar
           </base-button>
         </div>
