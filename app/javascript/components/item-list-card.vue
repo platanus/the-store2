@@ -44,12 +44,20 @@ async function buy() {
         {{ name }}
       </span>
     </div>
-    <button
-      class="w-full py-4 text-blue-800 disabled:text-zinc-500"
-      :disabled="loading"
-      @click="buy"
-    >
-      Comprar
-    </button>
+    <div class="flex w-full">
+      <button
+        class="w-full py-4 text-blue-800 disabled:text-zinc-500"
+        :disabled="loading"
+        @click="buy"
+      >
+        Comprar
+      </button>
+      <a
+        :href="`/items/${itemId}`"
+        class="w-full py-4 text-center text-blue-800 disabled:text-zinc-500"
+      >
+        Ver detalle
+      </a>
+    </div>
   </div>
 </template>

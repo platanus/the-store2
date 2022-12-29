@@ -9,7 +9,7 @@ defineProps<Props>();
 </script>
 
 <template>
-  <div class="mx-auto grid grid-cols-2 gap-12">
+  <div class="mx-auto grid gap-12 sm:grid-cols-2">
     <item-list-card
       v-for="item in items"
       :key="item.id"
