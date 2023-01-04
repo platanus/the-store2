@@ -4,6 +4,6 @@ class App::ItemsController < App::BaseController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = Item.includes(:reviews).find(params[:id])
   end
 end
