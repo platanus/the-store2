@@ -3,9 +3,11 @@ import { ref } from 'vue';
 import { useNotification } from '@kyvg/vue3-notification';
 import purchasesApi from '../api/purchases';
 import type { Item } from '../api/items';
+import ItemViewReviewComment from './item-view-review-comment.vue';
+import ItemViewReviewSummary from './item-view-review-summary.vue';
 
 type Props = {
-  item: Item
+  item: Item,
 }
 
 const props = defineProps<Props>();
@@ -23,6 +25,7 @@ async function buy() {
     loading.value = false;
   }
 }
+
 </script>
 
 <template>
@@ -64,5 +67,31 @@ async function buy() {
       </div>
     </div>
   </div>
+  <div
+    v-if="item.reviews.length > 0"
+    class="space-y-6"
+  >
+    <div>
+      <h2 class="text-xl font-bold text-zinc-800">
+        Opiniones del producto
+      </h2>
+      <item-view-review-summary
+        :count="item.reviewsCount"
+        :average="item.reviewsAverage"
+      />
+    </div>
+    <ul class="flex flex-col gap-y-6">
+      <item-view-review-comment
+        v-for="review in item.reviews"
+        :key="review.id"
+        :user-id="review.userId"
+        :item-id="review.itemId"
+        :body="review.body"
+        :rating="review.rating"
+        :created-at="review.createdAt"
+        :updated-at="review.updatedAt"
+        class="border-b border-zinc-800"
+      />
+    </ul>
+  </div>
 </template>
-
