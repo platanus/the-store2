@@ -12,6 +12,18 @@ class Api::Internal::ItemSerializer < BaseSerializer
     :description,
     :price,
     :created_at,
-    :updated_at
+    :updated_at,
+    :reviews_count,
+    :reviews_average
   )
+
+  has_many :reviews
+
+  def reviews_count
+    object.decorate.reviews_count
+  end
+
+  def reviews_average
+    object.decorate.reviews_average.to_f
+  end
 end

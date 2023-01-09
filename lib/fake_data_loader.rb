@@ -34,6 +34,7 @@ module FakeDataLoader
     load_users
     load_items
     load_purchases
+    load_reviews
   end
 
   def self.load_admin
@@ -45,13 +46,11 @@ module FakeDataLoader
 
   def self.load_users
     10.times do
-      user = create(
+      create(
         :user,
         email: Faker::Internet.email,
         password: USER_PASSWORD
       )
-
-      puts "user: #{user.email} - password: #{USER_PASSWORD}"
     end
   end
 
@@ -73,6 +72,20 @@ module FakeDataLoader
           user: user
         )
       end
+    end
+  end
+
+  def self.load_reviews
+    item_ids = Item.pluck(:id)
+    user_ids = User.pluck(:id)
+    10.times do
+      create(
+        :review,
+        user_id: user_ids.sample,
+        item_id: item_ids.sample,
+        body: Faker::Lorem.paragraph,
+        rating: rand(1..5)
+      )
     end
   end
 end
