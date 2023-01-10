@@ -3,7 +3,7 @@ import formatDate from '../utils/format-date';
 import StarRating from './star-rating.vue';
 
 type Props = {
-  userId: number,
+  userEmail: string,
   body: string,
   rating: number,
   createdAt: string,
@@ -29,7 +29,7 @@ defineProps<Props>();
         <p> {{ body }}</p>
       </blockquote>
       <figcaption>
-        <p>{{ userId }}</p>
+        <p>{{ userEmail }}</p>
       </figcaption>
     </figure>
   </li>
