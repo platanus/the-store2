@@ -1,18 +1,32 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useNotification } from '@kyvg/vue3-notification';
+import type { User } from '../api/users';
+import type { Review } from '../api/reviews';
 import purchasesApi from '../api/purchases';
 import type { Item } from '../api/items';
 import ItemViewReviewComment from './item-view-review-comment.vue';
 import ItemViewReviewSummary from './item-view-review-summary.vue';
+import ItemViewReviewForm from './item-view-review-form.vue';
 
 type Props = {
   item: Item,
+  user: User,
+  reviews: Review[]
 }
 
 const props = defineProps<Props>();
 const loading = ref(false);
+const showForm = ref(false);
+
 const { notify } = useNotification();
+const listReviews = ref(props.reviews);
+
+const userReviewExists = computed(() => listReviews.value.some(review => review.userId === props.user.id));
+
+function onSubmitReview(review: Review) {
+  listReviews.value.unshift(review);
+}
 
 async function buy() {
   loading.value = true;
@@ -68,23 +82,54 @@ async function buy() {
     </div>
   </div>
   <div
-    v-if="item.reviews.length > 0"
+    v-if="reviews.length > 0"
     class="space-y-6"
   >
+    <div class="flex flex-col items-center justify-center gap-y-8 md:flex-row md:gap-16">
+      <div>
+        <h2 class="text-xl font-bold text-zinc-800">
+          Opiniones del producto
+        </h2>
+        <item-view-review-summary
+          :count="item.reviewsCount"
+          :average="item.reviewsAverage"
+        />
+      </div>
+
+      <div v-if="!showForm && !userReviewExists">
+        <p>Cómo te fue con el producto?</p>
+        <base-button
+          variant="secondary"
+          class="w-full rounded-full border-2 border-blue-800"
+          @click="showForm = true"
+        >
+          Escribir mi opinión
+        </base-button>
+      </div>
+    </div>
+
     <div>
-      <h2 class="text-xl font-bold text-zinc-800">
-        Opiniones del producto
-      </h2>
-      <item-view-review-summary
-        :count="item.reviewsCount"
-        :average="item.reviewsAverage"
-      />
+      <p
+        v-if="userReviewExists"
+        class="text-3xl text-zinc-800"
+      >
+        Ya ingresaste un review 😢.
+      </p>
+      <div v-else>
+        <item-view-review-form
+          v-if="showForm"
+          :item-id="item.id"
+          @submit-review="onSubmitReview"
+          @close-form="showForm = false"
+        />
+      </div>
     </div>
     <ul class="flex flex-col gap-y-6">
       <item-view-review-comment
-        v-for="review in item.reviews"
+        v-for="review in listReviews"
         :key="review.id"
         :user-id="review.userId"
+        :user-email="review.user.email"
         :item-id="review.itemId"
         :body="review.body"
         :rating="review.rating"

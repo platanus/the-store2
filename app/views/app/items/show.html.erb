@@ -1,2 +1,6 @@
-<item-view :item="<%= serialize_resource(@item) %>">
+<item-view
+  :item="<%= serialize_resource(@item) %>"
+  :user="<%=serialize_resource(current_user) %>"
+  :reviews="<%= serialize_resource(@reviews) %>"
+>
 </item-view>
